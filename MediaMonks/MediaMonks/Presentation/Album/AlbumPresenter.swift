@@ -14,6 +14,7 @@ protocol AlbumView {
 
 protocol AlbumPresenter {
     var albums: [Album] { get }
+    var photosBusinessController: PhotosBusinessController { get }
     
     func viewDidLoad()
     func update(view: AlbumView)
@@ -22,6 +23,7 @@ protocol AlbumPresenter {
 class AlbumPresenterDefault: AlbumPresenter {
     
     var albums: [Album] = []
+    var photosBusinessController: PhotosBusinessController = PhotosBusinessController(photoGateway: PhotoGateway())
     
     private var view: AlbumView?
     private var albumBusinessController: AlbumBusinessController

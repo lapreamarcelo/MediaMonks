@@ -1,5 +1,5 @@
 //
-//  AlbumGateway.swift
+//  PhotoGateway.swift
 //  MediaMonks
 //
 //  Created by Marcelo Laprea on 17/08/2020.
@@ -8,13 +8,14 @@
 
 import Foundation
 
-typealias AlbumsResponseCompletion = (Result<[AlbumResponse], MediaMonkError>) -> Void
+typealias PhotosResponseCompletion = (Result<[PhotoResponse], MediaMonkError>) -> Void
 
-protocol AlbumGatewayProtocol {
-    func getAlbums(completion: @escaping AlbumsResponseCompletion)
+protocol PhotoGatewayProtocol {
+    func getPhotosByAlbumID(albumId: Int, completion: @escaping PhotosResponseCompletion)
+//    func getAlbums(completion: @escaping AlbumsResponseCompletion)
 }
 
-class AlbumGateway: AlbumGatewayProtocol {
+class PhotoGateway: PhotoGatewayProtocol {
     
     var baseURL: URL {
         guard let url = Enviroment().urlValue(withKey: .baseURL) else {
@@ -24,13 +25,15 @@ class AlbumGateway: AlbumGatewayProtocol {
         return url
     }
     
-    func getAlbums(completion: @escaping AlbumsResponseCompletion) {
-        guard let url = URL(string: "/albums", relativeTo: baseURL) else {
+    func getPhotosByAlbumID(albumId: Int, completion: @escaping PhotosResponseCompletion) {
+        let albumId = String(albumId)
+        
+        guard let url = URL(string: "/photos?albumId=\(albumId)", relativeTo: baseURL) else {
             completion(.failure(.wrongUrl))
             
             return
         }
-    
+        
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let dataResponse = data, error == nil else {
                 completion(.failure(.unknownError))
@@ -40,8 +43,8 @@ class AlbumGateway: AlbumGatewayProtocol {
             
             do {
                 let decoder = JSONDecoder()
-                let albumsResponse = try decoder.decode([AlbumResponse].self, from: dataResponse)
-                completion(.success(albumsResponse))
+                let photosResponse = try decoder.decode([PhotoResponse].self, from: dataResponse)
+                completion(.success(photosResponse))
             } catch let parsingError {
                 print(parsingError)
             }

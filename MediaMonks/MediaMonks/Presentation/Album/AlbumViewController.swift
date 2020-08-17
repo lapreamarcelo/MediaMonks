@@ -52,6 +52,7 @@ class AlbumViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.mainColor]
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : UIColor.mainColor]
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -96,5 +97,19 @@ extension AlbumViewController: UITableViewDelegate, UITableViewDataSource {
             animations: {
                 cell.alpha = 1
         })
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let albumPresenter = albumPresenter else {
+            fatalError("Album presenter can't be nil")
+        }
+        
+        let album = albumPresenter.albums[indexPath.row]
+        let photoPresenter = PhotoPresenterDefault(photosBusinessController: albumPresenter.photosBusinessController, album: album)
+        let photoViewController = PhotoViewController(photoPresenter: photoPresenter)
+        
+        show(photoViewController, sender: nil)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
