@@ -27,6 +27,9 @@ class AlbumViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        albumPresenter?.update(view: self)
+        albumPresenter?.viewDidLoad()
     }
     
     // MARK: - Private

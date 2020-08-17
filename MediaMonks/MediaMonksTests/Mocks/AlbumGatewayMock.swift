@@ -9,14 +9,14 @@
 @testable import MediaMonks
 
 class AlbumGatewayMock: AlbumGatewayProtocol {
-    
+        
     var albumsMocked: [AlbumResponse] = []
     
     init (albumsMocked: [AlbumResponse]) {
         self.albumsMocked = albumsMocked
     }
     
-    func getAlbums() -> [AlbumResponse] {
-        return albumsMocked
+    func getAlbums(completion: @escaping AlbumsResponseCompletion) {
+        completion(.success(albumsMocked))
     }
 }

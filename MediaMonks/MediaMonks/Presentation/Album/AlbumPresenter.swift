@@ -11,7 +11,8 @@ protocol AlbumView {
 }
 
 protocol AlbumPresenter {
-    
+    func viewDidLoad()
+    func update(view: AlbumView)
 }
 
 class AlbumPresenterDefault: AlbumPresenter {
@@ -28,6 +29,15 @@ class AlbumPresenterDefault: AlbumPresenter {
     // MARK: - Lifecycle
     
     func viewDidLoad() {
+        albumBusinessController.getAlbums { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+                
+            case .success(let albums):
+                print(albums)
+            }
+        }
     }
     
     func update(view: AlbumView) {

@@ -6,6 +6,8 @@
 //  Copyright © 2020 Marcelo Laprea. All rights reserved.
 //
 
+typealias AlbumsCompletion = (Result<[Album], MediaMonkError>) -> Void
+
 class AlbumBusinessController {
     
     var albumGateway: AlbumGatewayProtocol
@@ -14,9 +16,15 @@ class AlbumBusinessController {
         self.albumGateway = albumGateway
     }
     
-    func getAlbums() -> [Album] {
-        let albumsResponse = albumGateway.getAlbums()
-        
-        return albumsResponse.map { $0.convert() }
+    func getAlbums(completion: @escaping AlbumsCompletion) {
+        albumGateway.getAlbums { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+                
+            case .success(let albumResponses):
+                completion(.success(albumResponses.map { $0.convert() }))
+            }
+        }
     }
 }

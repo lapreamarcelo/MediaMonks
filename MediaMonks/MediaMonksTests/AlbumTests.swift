@@ -30,9 +30,16 @@ class AlbumTests: XCTestCase {
     
     func testEmptyAlbums() {
         let albumBusinessController = AlbumBusinessController(albumGateway: AlbumGatewayMock(albumsMocked: []))
-        let albums = albumBusinessController.getAlbums()
         
-        XCTAssertEqual(albums.count, 0)
+        albumBusinessController.getAlbums { (result) in
+            switch result {
+            case .failure(_):
+                break
+                
+            case .success(let albums):
+                XCTAssertEqual(albums.count, 0)
+            }
+        }
     }
     
     func testTwoAlbums() {
@@ -40,9 +47,15 @@ class AlbumTests: XCTestCase {
             [AlbumResponse(userId: 1, id: 1, title: "First album"),
              AlbumResponse(userId: 2, id: 2, title: "Second album")]))
         
-        let albums = albumBusinessController.getAlbums()
-        
-        XCTAssertEqual(albums.count, 2)
-        XCTAssertEqual(albums[1].id, 2)
+        albumBusinessController.getAlbums { (result) in
+            switch result {
+            case .failure(_):
+                break
+                
+            case .success(let albums):
+                XCTAssertEqual(albums.count, 2)
+                XCTAssertEqual(albums[1].id, 2)
+            }
+        }
     }
 }
