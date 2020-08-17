@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let albumBusinessController = AlbumBusinessController()
+        let albumBusinessController = AlbumBusinessController(albumGateway: AlbumGateway())
         let albumPresenter = AlbumPresenterDefault(albumBusinessController: albumBusinessController)
         let albumViewController = AlbumViewController(albumPresenter: albumPresenter)
         

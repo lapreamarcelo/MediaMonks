@@ -10,13 +10,13 @@ import XCTest
 @testable import MediaMonks
 
 class AlbumTests: XCTestCase {
-
-    override func setUp() {
         
+    override func setUp() {
+        super.setUp()
     }
     
     override class func tearDown() {
-        
+        super.tearDown()
     }
 
     func testAlbumConvert() {
@@ -26,5 +26,23 @@ class AlbumTests: XCTestCase {
         XCTAssertEqual(singleAlbum.userId, 1)
         XCTAssertEqual(singleAlbum.id, 1)
         XCTAssertEqual(singleAlbum.title, "First album")
+    }
+    
+    func testEmptyAlbums() {
+        let albumBusinessController = AlbumBusinessController(albumGateway: AlbumGatewayMock(albumsMocked: []))
+        let albums = albumBusinessController.getAlbums()
+        
+        XCTAssertEqual(albums.count, 0)
+    }
+    
+    func testTwoAlbums() {
+        let albumBusinessController = AlbumBusinessController(albumGateway: AlbumGatewayMock(albumsMocked:
+            [AlbumResponse(userId: 1, id: 1, title: "First album"),
+             AlbumResponse(userId: 2, id: 2, title: "Second album")]))
+        
+        let albums = albumBusinessController.getAlbums()
+        
+        XCTAssertEqual(albums.count, 2)
+        XCTAssertEqual(albums[1].id, 2)
     }
 }
