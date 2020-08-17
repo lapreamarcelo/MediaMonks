@@ -29,4 +29,35 @@ class PhotoTests: XCTestCase {
         XCTAssertEqual(singlePhoto.url, "url")
         XCTAssertEqual(singlePhoto.thumbnailUrl, "url")
     }
+    
+    func testEmptyPhotos() {
+        let photoBusinessController = PhotosBusinessController(photoGateway: PhotoGatewayMock(photosMocked: []))
+        
+        photoBusinessController.getPhotosByAlbumID(albumId: 1) { result in
+            switch result {
+            case .failure(_):
+                break
+                
+            case .success(let photos):
+                XCTAssertEqual(photos.count, 0)
+            }
+        }
+    }
+    
+    func testTwoPhotos() {
+        let photoBusinessController = PhotosBusinessController(photoGateway: PhotoGatewayMock(photosMocked: [
+            PhotoResponse(albumId: 1, id: 1, title: "First photo", url: "url", thumbnailUrl: "url"),
+            PhotoResponse(albumId: 2, id: 2, title: "Second photo", url: "url", thumbnailUrl: "url")]))
+        
+        photoBusinessController.getPhotosByAlbumID(albumId: 1) { result in
+            switch result {
+            case .failure(_):
+                break
+                
+            case .success(let photos):
+                XCTAssertEqual(photos.count, 2)
+                XCTAssertEqual(photos[1].albumId, 2)
+            }
+        }
+    }
 }

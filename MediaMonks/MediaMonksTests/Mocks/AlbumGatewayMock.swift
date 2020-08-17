@@ -12,7 +12,7 @@ class AlbumGatewayMock: AlbumGatewayProtocol {
         
     var albumsMocked: [AlbumResponse] = []
     
-    init (albumsMocked: [AlbumResponse]) {
+    init(albumsMocked: [AlbumResponse]) {
         self.albumsMocked = albumsMocked
     }
     
