@@ -12,11 +12,11 @@ import XCTest
 class PhotoTests: XCTestCase {
 
     override func setUp() {
-        
+        super.setUp()
     }
     
     override class func tearDown() {
-        
+        super.tearDown()
     }
 
     func testAlbumConvert() {

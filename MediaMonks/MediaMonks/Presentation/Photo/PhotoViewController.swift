@@ -41,7 +41,8 @@ class PhotoViewController: UIViewController {
     // MARK: - Private
     
     private func setup() {
-        title = "Photos"
+        title = photoPresenter?.album?.title
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         collectionView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
         collectionView.contentInset = UIEdgeInsets(top: 23, left: 16, bottom: 23, right: 16)
@@ -101,6 +102,18 @@ extension PhotoViewController: UICollectionViewDelegateFlowLayout {
         let collectionCellHeight = collectionCellWidth
 
         return CGSize(width: collectionCellWidth, height: collectionCellHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let photoPresenter = photoPresenter else {
+            fatalError("Photo presenter can't be nil")
+        }
+        
+        let photo = photoPresenter.photos[indexPath.row]
+        let photoDetailPresenter = PhotoDetailPresenterDefault(photosBusinessController: photoPresenter.photosBusinessController, photo: photo)
+        let photoDetailViewController = PhotoDetailViewController(photoDetailPresenter: photoDetailPresenter)
+        
+        show(photoDetailViewController, sender: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

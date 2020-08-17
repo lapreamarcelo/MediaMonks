@@ -13,7 +13,9 @@ protocol PhotoView {
 }
 
 protocol PhotoPresenter {
+    var album: Album? { get }
     var photos: [Photo] { get }
+    var photosBusinessController: PhotosBusinessController { get }
     
     func viewDidLoad()
     func update(view: PhotoView)
@@ -21,11 +23,11 @@ protocol PhotoPresenter {
 
 class PhotoPresenterDefault: PhotoPresenter {
     
+    var album: Album?
     var photos: [Photo] = []
+    var photosBusinessController: PhotosBusinessController
     
-    private var album: Album?
     private var view: PhotoView?
-    private var photosBusinessController: PhotosBusinessController
     
     // MARK: - Initialization
     
@@ -34,7 +36,7 @@ class PhotoPresenterDefault: PhotoPresenter {
         self.album = album
     }
     
-    // MARK: - AlbumPresenter
+    // MARK: - PhotoPresenter
     
     func viewDidLoad() {
         getPhotos()
