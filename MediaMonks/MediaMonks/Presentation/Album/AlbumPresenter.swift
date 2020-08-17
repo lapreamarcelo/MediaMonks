@@ -6,16 +6,22 @@
 //  Copyright © 2020 Marcelo Laprea. All rights reserved.
 //
 
+import Foundation
+
 protocol AlbumView {
-    
+    func reloadData()
 }
 
 protocol AlbumPresenter {
+    var albums: [Album] { get }
+    
     func viewDidLoad()
     func update(view: AlbumView)
 }
 
 class AlbumPresenterDefault: AlbumPresenter {
+    
+    var albums: [Album] = []
     
     private var view: AlbumView?
     private var albumBusinessController: AlbumBusinessController
@@ -26,25 +32,30 @@ class AlbumPresenterDefault: AlbumPresenter {
         self.albumBusinessController = albumBusinessController
     }
     
-    // MARK: - Lifecycle
+    // MARK: - AlbumPresenter
     
     func viewDidLoad() {
-        albumBusinessController.getAlbums { (result) in
-            switch result {
-            case .failure(let error):
-                print(error)
-                
-            case .success(let albums):
-                print(albums)
-            }
-        }
+        getAlbums()
     }
     
     func update(view: AlbumView) {
         self.view = view
     }
     
-    // MARK: - AlbumPresenter
-    
     // MARK: - Private
+    
+    private func getAlbums() {
+        albumBusinessController.getAlbums { [weak self] (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .failure(let error):
+                    print(error)
+                    
+                case .success(let albums):
+                    self?.albums = albums
+                    self?.view?.reloadData()
+                }
+            }
+        }
+    }
 }

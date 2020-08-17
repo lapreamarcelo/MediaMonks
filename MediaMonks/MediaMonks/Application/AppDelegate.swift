@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let albumViewController = AlbumViewController(albumPresenter: albumPresenter)
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = albumViewController
+        window?.rootViewController = UINavigationController(rootViewController: albumViewController)
         window?.makeKeyAndVisible()
         
         return true

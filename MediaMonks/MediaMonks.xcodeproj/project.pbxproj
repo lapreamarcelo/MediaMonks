@@ -25,6 +25,9 @@
 		6322D54124EAE1E700D21F08 /* AlbumGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322D54024EAE1E700D21F08 /* AlbumGatewayMock.swift */; };
 		6322D54624EAE4F400D21F08 /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322D54524EAE4F400D21F08 /* Enviroment.swift */; };
 		6322D54824EAE65000D21F08 /* MediaMonksErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322D54724EAE65000D21F08 /* MediaMonksErrors.swift */; };
+		6322D54C24EAEB2800D21F08 /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322D54A24EAEB2800D21F08 /* AlbumTableViewCell.swift */; };
+		6322D54D24EAEB2800D21F08 /* AlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6322D54B24EAEB2800D21F08 /* AlbumTableViewCell.xib */; };
+		6322D54F24EAECD100D21F08 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322D54E24EAECD100D21F08 /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,9 @@
 		6322D54024EAE1E700D21F08 /* AlbumGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumGatewayMock.swift; sourceTree = "<group>"; };
 		6322D54524EAE4F400D21F08 /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		6322D54724EAE65000D21F08 /* MediaMonksErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaMonksErrors.swift; sourceTree = "<group>"; };
+		6322D54A24EAEB2800D21F08 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
+		6322D54B24EAEB2800D21F08 /* AlbumTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumTableViewCell.xib; sourceTree = "<group>"; };
+		6322D54E24EAECD100D21F08 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +170,7 @@
 				6322D52424EAD68100D21F08 /* AlbumViewController.swift */,
 				6322D53724EADCE500D21F08 /* AlbumPresenter.swift */,
 				6322D52524EAD68100D21F08 /* AlbumViewController.xib */,
+				6322D54924EAEB1700D21F08 /* Cells */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -215,9 +222,19 @@
 			isa = PBXGroup;
 			children = (
 				6322D54524EAE4F400D21F08 /* Enviroment.swift */,
+				6322D54E24EAECD100D21F08 /* Colors.swift */,
 				6322D54724EAE65000D21F08 /* MediaMonksErrors.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		6322D54924EAEB1700D21F08 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6322D54A24EAEB2800D21F08 /* AlbumTableViewCell.swift */,
+				6322D54B24EAEB2800D21F08 /* AlbumTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +321,7 @@
 				6322D52724EAD68100D21F08 /* AlbumViewController.xib in Resources */,
 				6322D50B24EAD47200D21F08 /* LaunchScreen.storyboard in Resources */,
 				6322D50824EAD47200D21F08 /* Assets.xcassets in Resources */,
+				6322D54D24EAEB2800D21F08 /* AlbumTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +342,7 @@
 				6322D53824EADCE600D21F08 /* AlbumPresenter.swift in Sources */,
 				6322D53224EAD8E300D21F08 /* Photo.swift in Sources */,
 				6322D52624EAD68100D21F08 /* AlbumViewController.swift in Sources */,
+				6322D54F24EAECD100D21F08 /* Colors.swift in Sources */,
 				6322D4FF24EAD46F00D21F08 /* AppDelegate.swift in Sources */,
 				6322D52C24EAD74400D21F08 /* AlbumResponse.swift in Sources */,
 				6322D53B24EADDD500D21F08 /* AlbumBusinessController.swift in Sources */,
@@ -331,6 +350,7 @@
 				6322D54824EAE65000D21F08 /* MediaMonksErrors.swift in Sources */,
 				6322D53024EAD8AD00D21F08 /* PhotoResponse.swift in Sources */,
 				6322D50124EAD46F00D21F08 /* SceneDelegate.swift in Sources */,
+				6322D54C24EAEB2800D21F08 /* AlbumTableViewCell.swift in Sources */,
 				6322D52E24EAD88600D21F08 /* Album.swift in Sources */,
 				6322D54624EAE4F400D21F08 /* Enviroment.swift in Sources */,
 			);
