@@ -21,5 +21,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         if let imagePath = photo?.thumbnailUrl, let imageURL = URL(string: imagePath) {
             imageView.kf.setImage(with: imageURL, placeholder: UIImage(named: "empty_image"))
         }
+        
+        imageView.layer.cornerRadius = 5
     }
 }

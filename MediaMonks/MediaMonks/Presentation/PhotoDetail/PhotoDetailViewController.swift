@@ -50,6 +50,8 @@ class PhotoDetailViewController: UIViewController {
         if let imagePath = photo?.url, let imageURL = URL(string: imagePath) {
             imageView.kf.setImage(with: imageURL, placeholder: UIImage(named: "empty_image"))
         }
+        
+        imageView.layer.cornerRadius = 5
     }
 }
 
